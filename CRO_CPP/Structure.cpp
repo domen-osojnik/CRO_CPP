@@ -905,10 +905,8 @@ std::vector<std::vector<std::string> > Structure::decomposition2(std::string s, 
 #pragma endregion Decomposition functions
 
 #pragma region Collision functions
-std::vector<std::vector<std::string> > Structure::interMolecularIneffectiveCollision(std::string s, std::vector<std::string> popI, std::vector<std::string> popJ)
+std::vector<std::vector<std::string> > Structure::interMolecularIneffectiveCollision(std::string s, std::vector<std::string> & popI, std::vector<std::string> & popJ)
 {
-    std::vector<std::string> cki = popI;
-    std::vector<std::string> ckj = popJ;
     int len = s.length();
 
     int nPoint = 1 + poisson(2);
@@ -918,14 +916,14 @@ std::vector<std::vector<std::string> > Structure::interMolecularIneffectiveColli
 
     if (nPoint % 2 != 0)
     {
-        if (hasDistance(cki[r], r))
+        if (hasDistance(popI[r], r))
         {
-            cki[r] = opp(cki[r]);
+            popI[r] = opp(popI[r]);
         }
 
-        if (hasDistance(ckj[r], r))
+        if (hasDistance(popJ[r], r))
         {
-            ckj[r] = opp(ckj[r]);
+            popJ[r] = opp(popJ[r]);
         }
     }
 
@@ -933,14 +931,14 @@ std::vector<std::vector<std::string> > Structure::interMolecularIneffectiveColli
     {
         for (int i = r; i < len; i++)
         {
-            if (hasDistance(cki[r], r))
+            if (hasDistance(popI[r], r))
             {
-                cki[r] = opp(cki[r]);
+                popJ[r] = opp(popJ[r]);
             }
 
-            if (hasDistance(ckj[r], r))
+            if (hasDistance(popJ[r], r))
             {
-                ckj[r] = opp(ckj[r]);
+                popJ[r] = opp(popJ[r]);
             }
         }
 
@@ -948,16 +946,14 @@ std::vector<std::vector<std::string> > Structure::interMolecularIneffectiveColli
 
     std::vector<std::vector<std::string> > returnArr(2, std::vector<std::string>(len));
 
-    returnArr[0] = cki;
-    returnArr[1] = ckj;
+    returnArr[0] = popI;
+    returnArr[1] = popJ;
 
     return returnArr;
 }
 
-std::vector<std::vector<std::string> > Structure::interMolecularIneffectiveCollision1(std::string s, std::vector<std::string> popI, std::vector<std::string> popJ, std::vector<std::string> u1)
+std::vector<std::vector<std::string> > Structure::interMolecularIneffectiveCollision1(std::string s, std::vector<std::string> popI, std::vector<std::string> & popJ, std::vector<std::string> & u1)
 {
-    std::vector<std::string> cki = popI;
-    std::vector<std::string> ckj = popJ;
     int len = s.length();
 
     std::random_device rd;
@@ -973,24 +969,24 @@ std::vector<std::vector<std::string> > Structure::interMolecularIneffectiveColli
 
     if (nPoint % 2 != 0)
     {
-        temp = cki[r];
-        cki[r] = ckj[r];
-        ckj[r] = temp;
+        temp = popI[r];
+        popI[r] = popJ[r];
+        popJ[r] = temp;
     }
     if (nPoint % 2 == 0)
     {
         for (int i = r; i < len; i++)
         {
-            temp = cki[i];
-            cki[i] = ckj[i];
-            ckj[i] = temp;
+            temp = popI[i];
+            popI[i] = popJ[i];
+            popJ[i] = temp;
         }
     }
 
     std::vector<std::vector<std::string> > returnArr(2, std::vector<std::string>(len));;
 
-    returnArr[0] = cki;
-    returnArr[1] = ckj;
+    returnArr[0] = popI;
+    returnArr[1] = popJ;
 
     return returnArr;
 }

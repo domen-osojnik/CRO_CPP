@@ -48,8 +48,8 @@ double Operators::CRO_PSP(int pop_size, std::string s, double moleCol, double in
     int alpha = (int)(startP + (dis(gen) * lastP));
     int beta = (int)(startP + (dis(gen) * lastP));
 
-    alpha = 59;
-    beta = 71;
+  /*  alpha = 59;
+    beta = 71;*/
 
     std::vector<int> numHit(pop_size * 4, 0);
     std::vector<int> minHit(pop_size * 4, 0);
@@ -105,7 +105,7 @@ double Operators::CRO_PSP(int pop_size, std::string s, double moleCol, double in
 
             for (int i = 0; i < pop_size; i++)
             {
-                r = 0.27;
+                r = dis(gen);
 
                 if (r > moleCol)
                 {
@@ -204,11 +204,11 @@ double Operators::CRO_PSP(int pop_size, std::string s, double moleCol, double in
                 }
                 else
                 {
-                    int j = 494;
-                   /* do
+                    int j;
+                    do
                     {
                         j = (int)(dis(gen) * pop_size);
-                    } while (i == j);*/
+                    } while (i == j);
 
                     if (KE <= beta)
                     {
@@ -359,9 +359,7 @@ double Operators::CRO_PSP(int pop_size, std::string s, double moleCol, double in
                     }
                 }
             }
-            std::vector<std::string> test = { "U", "D", "F", "R", "U", "L", "L", "L", "D", "B", "R", "U", "L", "L", "U", "R", "R",
-                "R", "U", "B", "D", "R", "R", "R", "R", "B", "R", "R", "R", "D", "B", "L", "U", "R", "B", "L", "U", "R", "U", "U", "R", "R", "R", "F", "U", "R", "U", "L"};
-            this->struc.getEnergy(sequence, test);
+            this->struc.getEnergy(sequence, population[0]);
            
 
             energyValue = this->struc.getEnergyValue();

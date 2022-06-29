@@ -45,8 +45,8 @@ public:
     std::vector<std::vector<std::string> > decomposition2(std::string s, std::vector<std::string>  u1);
 
     // Inter molecular ineffective collision
-    std::vector<std::vector<std::string> > interMolecularIneffectiveCollision(std::string s, std::vector<std::string>  popI, std::vector<std::string>  popJ);
-    std::vector<std::vector<std::string> > interMolecularIneffectiveCollision1(std::string s, std::vector<std::string>  popI, std::vector<std::string>  popJ, std::vector<std::string>  u1);
+    std::vector<std::vector<std::string>> interMolecularIneffectiveCollision(std::string s, std::vector<std::string>& popI, std::vector<std::string>& popJ);
+    std::vector<std::vector<std::string>> interMolecularIneffectiveCollision1(std::string s, std::vector<std::string> popI, std::vector<std::string>& popJ, std::vector<std::string>& u1);
     std::vector<std::vector<std::string>> interMolecularIneffectiveCollision2(std::string s, std::vector<std::string>& popI, std::vector<std::string>& popJ);
 
     // Synthesis functions
