@@ -12,23 +12,23 @@
 double Operators::CRO_PSP(int pop_size, std::string s, double moleCol, double initialKE, double KELossRate)
 {
     std::vector<std::vector<std::string> > population = search_space_creation(s, pop_size, target);
-    population = {};
-       
+    //population = {};
+    //   
 
-    std::ifstream is("space_creation.txt");
-    std::istream_iterator<char> start(is), end;
-    std::vector<char> characters(start, end);
-    std::vector<std::string> bomba;
-    for (int i = 0; i < characters.size(); i)
-    {   
-        bomba = {};
-        for (int j = 0; j < 48; j++, i++)
-        {
-            std::string str(1, characters[i]);
-            bomba.push_back(str);
-        }
-        population.push_back(bomba);
-    }
+    //std::ifstream is("space_creation.txt");
+    //std::istream_iterator<char> start(is), end;
+    //std::vector<char> characters(start, end);
+    //std::vector<std::string> bomba;
+    //for (int i = 0; i < characters.size(); i)
+    //{   
+    //    bomba = {};
+    //    for (int j = 0; j < 48; j++, i++)
+    //    {
+    //        std::string str(1, characters[i]);
+    //        bomba.push_back(str);
+    //    }
+    //    population.push_back(bomba);
+    //}
 
 
     double KE = initialKE;

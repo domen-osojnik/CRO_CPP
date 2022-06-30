@@ -466,7 +466,6 @@ std::vector<std::string> Structure::increasePerformance3(std::string s, std::vec
                     for (int k = start; k <= end; k++)
                     {
                         std::vector<std::string> tempDirec = u;
-                        bool check;
 
                         x = direc_coordinate[k - 1][0];
                         y = direc_coordinate[k - 1][1];

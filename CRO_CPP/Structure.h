@@ -19,12 +19,12 @@ private:
 #pragma region Variables
     std::vector<std::string> u;
     std::vector<int> e;
-    int energyValue;
+    int energyValue = 0;
 #pragma endregion Variables
 
 public:
 #pragma region Variables
-    int value = 0, repairCount;
+    int value = 0, repairCount = 0;
     std::vector<std::string> d;
 #pragma endregion Variables
 
