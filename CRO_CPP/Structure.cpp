@@ -220,23 +220,22 @@ std::vector<std::string> Structure::increasePerformance1(std::string s, std::vec
     return u;
 }
 
-std::vector<std::string> Structure::increasePerformance2(std::string s, std::vector<std::string> d, char monomer)
+std::vector<std::string> Structure::increasePerformance2(std::string s, std::vector<std::string> tempDirec, char monomer)
 {
    /* d = { "L","F","F","R","R","R","B","B","L","L","U","R","R","R","D","R","D","D","D","L","D","L","U","L","F","R","R","U","R","R","U","U","R","R","B","R","R","R","U","U","U","R","R","U","R","F","U","R" };
     monomer = 'H';*/
     repairCount = 0;
-    std::vector<std::string> u = d;
 
     int len = s.length();
     Operators op;
-    std::vector<std::vector<int> > direc_coordinate = op.getCoordinates(s, u);
+    std::vector<std::vector<int> > direc_coordinate = op.getCoordinates(s, tempDirec);
     int x, y, z;
 
     int count;
-    std::string direc = u[0];
+    std::string direc = tempDirec[0];
     int start = 1, end;
 
-    getEnergy(s, u);
+    getEnergy(s, tempDirec);
     int mainE = getEnergyValue();
 
     std::random_device rd;
@@ -261,10 +260,9 @@ std::vector<std::string> Structure::increasePerformance2(std::string s, std::vec
                 end = k - 1;
                 for (int i = start; i <= end; i++)
                 {
-                    if (hasDistance(u[k], k))
+                    if (hasDistance(tempDirec[k], k))
                     {
-                        direc_coordinate = op.getCoordinates(s, u);
-                        std::vector<std::string> tempDirec = u;
+                        direc_coordinate = op.getCoordinates(s, tempDirec);
                         bool check;
 
                         x = direc_coordinate[i - 1][0];
@@ -290,7 +288,6 @@ std::vector<std::string> Structure::increasePerformance2(std::string s, std::vec
 
                             if (e > mainE)
                             {
-                                u = tempDirec;
                                 mainE = e;
                             }
                         }
@@ -314,7 +311,6 @@ std::vector<std::string> Structure::increasePerformance2(std::string s, std::vec
 
                             if (e > mainE)
                             {
-                                u = tempDirec;
                                 mainE = e;
                             }
                         }
@@ -338,7 +334,6 @@ std::vector<std::string> Structure::increasePerformance2(std::string s, std::vec
 
                             if (e > mainE)
                             {
-                                u = tempDirec;
                                 mainE = e;
                             }
                         }
@@ -362,7 +357,6 @@ std::vector<std::string> Structure::increasePerformance2(std::string s, std::vec
 
                             if (e > mainE)
                             {
-                                u = tempDirec;
                                 mainE = e;
                             }
                         }
@@ -386,7 +380,6 @@ std::vector<std::string> Structure::increasePerformance2(std::string s, std::vec
 
                             if (e > mainE)
                             {
-                                u = tempDirec;
                                 mainE = e;
                             }
                         }
@@ -410,7 +403,6 @@ std::vector<std::string> Structure::increasePerformance2(std::string s, std::vec
 
                             if (e > mainE)
                             {
-                                u = tempDirec;
                                 mainE = e;
                             }
                         }
@@ -424,35 +416,34 @@ std::vector<std::string> Structure::increasePerformance2(std::string s, std::vec
             start = k;
         }
     }
-    return u;
+    return tempDirec;
 }
 
-std::vector<std::string> Structure::increasePerformance3(std::string s, std::vector<std::string> d, std::vector<std::string> target)
+std::vector<std::string> Structure::increasePerformance3(std::string s, std::vector<std::string> tempDirec, std::vector<std::string> target)
 {
-    std::vector<std::string> u = d;
-
     unsigned long len = s.length();
     Operators op;
 
-    std::vector<std::vector<int> > direc_coordinate = op.getCoordinates(s, u);
+    std::vector<std::vector<int> > direc_coordinate = op.getCoordinates(s, tempDirec);
 
     int x, y, z, count;
 
-    getEnergy(s, u);
+    getEnergy(s, tempDirec);
 
     int mainE = getEnergyValue();
 
-    std::string direc = u[0];
+    std::string direc = tempDirec[0];
     char monomer = s[0];
     int start = 1, end;
 
     count = 0;
 
+
     for (int i = 0; i < len; i++)
     {
-        if (hasDistance(u[i], i))
+        if (hasDistance(tempDirec[i], i))
         {
-            if (direc == u[i])
+            if (direc == tempDirec[i])
             {
                 count++;
                 continue;
@@ -465,7 +456,6 @@ std::vector<std::string> Structure::increasePerformance3(std::string s, std::vec
 
                     for (int k = start; k <= end; k++)
                     {
-                        std::vector<std::string> tempDirec = u;
 
                         x = direc_coordinate[k - 1][0];
                         y = direc_coordinate[k - 1][1];
@@ -492,7 +482,6 @@ std::vector<std::string> Structure::increasePerformance3(std::string s, std::vec
 
                             if (e > mainE)
                             {
-                                u = tempDirec;
                                 mainE = e;
                             }
                         }
@@ -519,7 +508,6 @@ std::vector<std::string> Structure::increasePerformance3(std::string s, std::vec
 
                             if (e > mainE)
                             {
-                                u = tempDirec;
                                 mainE = e;
                             }
                         }
@@ -546,7 +534,6 @@ std::vector<std::string> Structure::increasePerformance3(std::string s, std::vec
 
                             if (e > mainE)
                             {
-                                u = tempDirec;
                                 mainE = e;
                             }
                         }
@@ -573,7 +560,6 @@ std::vector<std::string> Structure::increasePerformance3(std::string s, std::vec
 
                             if (e > mainE)
                             {
-                                u = tempDirec;
                                 mainE = e;
                             }
                         }
@@ -600,7 +586,6 @@ std::vector<std::string> Structure::increasePerformance3(std::string s, std::vec
 
                             if (e > mainE)
                             {
-                                u = tempDirec;
                                 mainE = e;
                             }
                         }
@@ -627,7 +612,6 @@ std::vector<std::string> Structure::increasePerformance3(std::string s, std::vec
 
                             if (e > mainE)
                             {
-                                u = tempDirec;
                                 mainE = e;
                             }
                         }
@@ -635,19 +619,18 @@ std::vector<std::string> Structure::increasePerformance3(std::string s, std::vec
                 }
                 count = 0;
                 start = i;
-                direc = u[i];
+                direc = tempDirec[i];
                 monomer = s[i];
             }
         }
     }
-    return u;
+    return tempDirec;
 }
 #pragma endregion Performance increase functions
 
 #pragma region Innefective collision functions
 std::vector<std::string> Structure::onWallInnefectiveCollision(std::string s, std::vector<std::string>  popI)
 {
-    std::vector<std::string> u1 = popI;
     int len = s.length();
 
     std::string temp;
@@ -665,21 +648,20 @@ std::vector<std::string> Structure::onWallInnefectiveCollision(std::string s, st
     {
         select = (int)poisson(6);
 
-        if (u1[i] == direc_name[select])
+        if (popI[i] == direc_name[select])
         {
             i--;
             continue;
         }
 
-        u1[i] = direc_name[select];
+        popI[i] = direc_name[select];
     }
 
-    return u1;
+    return popI;
 }
 
 std::vector<std::string> Structure::onWallIneffectiveCollision1(std::string s, std::vector<std::string> popI, std::vector<std::string> u)
 {
-    std::vector<std::string> u1 = popI;
     int len = s.length();
     std::string temp;
 
@@ -715,9 +697,8 @@ std::vector<std::string> Structure::onWallIneffectiveCollision1(std::string s, s
         {
             popI[i] = u[i];
         }
-        u1 = popI;
     }
-    return u1;
+    return popI;
 }
 
 std::vector<std::string> Structure::onWallIneffectiveCollision2(std::string s, std::vector<std::string> & popI)
@@ -730,7 +711,7 @@ std::vector<std::string> Structure::onWallIneffectiveCollision2(std::string s, s
 
     std::uniform_int_distribution<int> dist(0, len - 1);
 
-    int r = 28;
+    int r = dist(mt);;
     popI[r] = opp(popI[r]);
     return popI;
 }
